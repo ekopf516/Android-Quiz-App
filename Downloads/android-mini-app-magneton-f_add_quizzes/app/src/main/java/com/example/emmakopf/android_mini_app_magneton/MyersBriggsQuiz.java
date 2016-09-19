@@ -1,7 +1,7 @@
 package com.example.emmakopf.android_mini_app_magneton;
 
 /**
- * Created by EmmaKopf on 9/16/16.
+ * Created by EmmaKopf on 9/16/16. Code from Sherriff's github.
  */
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,6 +14,8 @@ public class MyersBriggsQuiz implements Quiz{
     private static final int TYPE_TF = 2;
     private static final int TYPE_JP = 3;
 
+    private int currQuestion;
+
     // Categories for each answer
     private static final int CATEGORY_A = 0;
     private static final int CATEGORY_B = 1;
@@ -24,7 +26,7 @@ public class MyersBriggsQuiz implements Quiz{
         return this.questionList;
     }
 
-    private class Question implements QuizQuestion {
+    public static class Question implements QuizQuestion {
         String questionText;
         Answer answers[];
         int type;
@@ -35,18 +37,16 @@ public class MyersBriggsQuiz implements Quiz{
             this.type = type;
         }
 
-        public QuizEntity[] getAnswers()
-        {
+        public QuizEntity[] getAnswers() {
             return answers;
         }
 
-        public String getText()
-        {
+        public String getText() {
             return questionText;
         }
     }
 
-    private class Answer implements QuizEntity{
+    public static class Answer implements QuizEntity{
         String answerText;
         int category;
 
@@ -55,8 +55,7 @@ public class MyersBriggsQuiz implements Quiz{
             this.category = category;
         }
 
-        public String getText()
-        {
+        public String getText() {
             return answerText;
         }
     }
@@ -64,7 +63,8 @@ public class MyersBriggsQuiz implements Quiz{
     // Array for tracking quiz results
     private int[] results;
 
-    public MyersBriggsQuiz() {
+    public MyersBriggsQuiz(int currQuestion) {
+        this.currQuestion = currQuestion;
         resetResults();
 
         // Init list of questions in the C constructor
@@ -632,8 +632,7 @@ public class MyersBriggsQuiz implements Quiz{
         ));
     }
 
-    public String getName()
-    {
+    public String getName() {
         return "MyersBriggsQuiz";
     }
 
@@ -672,4 +671,17 @@ public class MyersBriggsQuiz implements Quiz{
             results[i] = 0;
         }
     }
+
+    public Question getQuestion() {
+        return (MyersBriggsQuiz.Question) questionList.get(currQuestion);
+    }
+
+    public int getCurrQuestion() {
+        return currQuestion + 1;
+    }
+
+    public void nextQuestion(){
+        currQuestion++;
+    }
+
 }

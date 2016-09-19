@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
-    private MyersBriggsQuiz myersQuiz = new MyersBriggsQuiz();
+    private MyersBriggsQuiz myersQuiz = new MyersBriggsQuiz(0);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +119,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void myersBriggs(View view) {
         Intent i = new Intent(this, QuizActivity.class);
+        Bundle myBundle = new Bundle();
+        myBundle.putInt("key", 1);
+        i.putExtras(myBundle);
         startActivity(i);
     }
 
