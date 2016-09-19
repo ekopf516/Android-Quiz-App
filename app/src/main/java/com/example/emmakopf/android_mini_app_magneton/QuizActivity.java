@@ -5,7 +5,10 @@ package com.example.emmakopf.android_mini_app_magneton;
  */
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.content.DialogInterface;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Button;
@@ -13,6 +16,7 @@ import android.widget.TextView;
 
 public class QuizActivity extends Activity {
 
+    final Context context = this;
     private ProgressBar progressBar;
     private Button answerOne;
     private Button answerTwo;
@@ -23,6 +27,8 @@ public class QuizActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
+
+        myers.resetResults();
 
         progressGlob = 0;
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -55,21 +61,52 @@ public class QuizActivity extends Activity {
         double incSize = 100.0/(myers.questionList.size());
         progressGlob += incSize;
 
-        System.out.print(progressGlob);
-        System.out.print(" ");
-        System.out.println(myers.questionList.size());
+        // AlertDialog to notify Quiz Results
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                context);
+
+        // set title
+        alertDialogBuilder.setTitle("Quiz Results");
+
+        // set dialog message
+        alertDialogBuilder
+                .setMessage("Your personality type is " + myers.getResult() + ". Click 'Yes' to exit and return to quizzes, click 'No' to return to the last question")
+                .setCancelable(false)
+                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // if this button is clicked, close
+                        // current activity
+                        finish();
+                    }
+                })
+                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // if this button is clicked, just close
+                        // the dialog box and do nothing
+                        dialog.cancel();
+                    }
+                });
+
+        // create alert dialog
+        final AlertDialog alertDialog = alertDialogBuilder.create();
 
             answerOne.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     myers.recordResponse(myers.getQuestion(), myers.getQuestion().answers[0]);
-                    myers.nextQuestion();
+
+
                     if (myers.getQuestion() == myers.questionList.get(myers.questionList.size() - 1)) {
-                        myers.getResult();
-                        finish();
+                        System.out.println("reached end 1");
+                        System.out.println(myers.getResult());
+
+                        alertDialog.show();
                     }
-                    progressBar.setProgress((int)progressGlob);
-                    myersQuiz();
+                    else {
+                        myers.nextQuestion();
+                        progressBar.setProgress((int) progressGlob);
+                        myersQuiz();
+                    }
                 }
             });
 
@@ -77,13 +114,17 @@ public class QuizActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     myers.recordResponse(myers.getQuestion(), myers.getQuestion().answers[1]);
-                    myers.nextQuestion();
                     if (myers.getQuestion() == myers.questionList.get(myers.questionList.size() - 1)) {
-                        myers.getResult();
-                        finish();
+                        System.out.println("reached end 2");
+                        System.out.println(myers.getResult());
+
+                        alertDialog.show();
                     }
-                    progressBar.setProgress((int)progressGlob);
-                    myersQuiz();
+                    else {
+                        myers.nextQuestion();
+                        progressBar.setProgress((int) progressGlob);
+                        myersQuiz();
+                    }
                 }
             });
 
