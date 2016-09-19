@@ -28,11 +28,16 @@ public class QuizActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+        // TODO: Check if this line gets in way of toast
         myers.resetResults();
 
+        // Keep track of progress through overhead bar.
+        // Color does not indicate progress, but length does.
         progressGlob = 0;
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setProgress(0);
+
+        // Buttons used for each response in quiz
         answerOne = (Button) findViewById(R.id.answerOne);
         answerTwo = (Button) findViewById(R.id.answerTwo);
         questionText = (TextView) findViewById(R.id.questionText);
@@ -94,17 +99,16 @@ public class QuizActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     myers.recordResponse(myers.getQuestion(), myers.getQuestion().answers[0]);
-
-
                     if (myers.getQuestion() == myers.questionList.get(myers.questionList.size() - 1)) {
                         System.out.println("reached end 1");
                         System.out.println(myers.getResult());
-
+                        // Display result of quiz
                         alertDialog.show();
                     }
                     else {
                         myers.nextQuestion();
                         progressBar.setProgress((int) progressGlob);
+                        // Automatically goes to next question from execution
                         myersQuiz();
                     }
                 }
@@ -117,16 +121,16 @@ public class QuizActivity extends Activity {
                     if (myers.getQuestion() == myers.questionList.get(myers.questionList.size() - 1)) {
                         System.out.println("reached end 2");
                         System.out.println(myers.getResult());
-
+                        // Display result of quiz
                         alertDialog.show();
                     }
                     else {
                         myers.nextQuestion();
                         progressBar.setProgress((int) progressGlob);
+                        // Automatically goes to next question from execution
                         myersQuiz();
                     }
                 }
             });
-
         }
 }

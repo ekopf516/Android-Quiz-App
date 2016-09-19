@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
             mFragmentTitleList.add(title);
         }
 
+        // Toast to pop up result
         public void myersBriggsToast(View view) {
             Context context = getApplicationContext();
             int duration = Toast.LENGTH_SHORT;
