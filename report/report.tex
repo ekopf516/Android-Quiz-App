@@ -12,13 +12,9 @@
 \maketitle
 
 \section{Instructions and Information}
-Given \(T(n)=2 \cdot T(\frac{n}{2})+n^2\) where \(a=2\) and \(b=2\), we can find that \(k=log_2 2=1\). This fulfills case 3 of the Master theorem where \(f(n)\in \Omega (n^{k+\epsilon } )\) for a positive \(\epsilon , n^2 \in n^{1+1} \) which leads us to the conclusion that \(T(n) \in \theta(n^2)\) \newline
+Do this after finishing app.
 
 \section{Lessons Learned}
-This is similar to the balance puzzle where we must divide the list into three, close-lengthed parts. We call \(f()\) on two of those three parts and if both of those parts have equal length and the function returns zero, then we know for sure that the two does not exist in either of those two segments. If one side is "heavier" then we know that the two must exist in that side. \newline
-
-\noindent From there, we perform the same operation on either the third part or the heavier side by splitting it as well into three parts and doing a comparison until we can isolate three single indices. Ultimately, either one side will return a non-zero value to identify the two or it will return zero in turn identifying that the remaining index is the two. \newline
-
-\noindent Given that the divide section does not result in three equally lengthed segments, one segment may have a length that is one longer than another. We then expect that side to have a greater sum, but if for some reason we discover that they have the same sum, then the shorter segment must contain the two and the pattern continues. In the ideal length \(n\), this results in a runtime of exactly \(O(log_3n)\) but this and all other cases still simplifie down to a runtime of \(O(logn)\)
+Previously, I (Emma) didn't have experience developing in Android because I took 2110 after the Android Project was scrapped from the syllabus. I had to get used to a lot of new aspects of coding/Java that I never dealt with before, such as XML files, intents, activities, fragments, and etc. Through this project, I better understand the underlying aspects that go into creating something as simple as a button on a screen, and all the different steps it takes to go from having said button pop up on the screen, have a click registered, and transfer data. The trials and errors I went through while working on my app taught me a lot about streamlining development as well as writing generally good, understandable code.
 
 \end{document}
