@@ -18,12 +18,15 @@ public class QuizActivity extends Activity {
     private Button answerTwo;
     private TextView questionText;
     private MyersBriggsQuiz myers = new MyersBriggsQuiz(0);
+    private double progressGlob;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+        progressGlob = 0;
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar.setProgress(0);
         answerOne = (Button) findViewById(R.id.answerOne);
         answerTwo = (Button) findViewById(R.id.answerTwo);
         questionText = (TextView) findViewById(R.id.questionText);
@@ -48,6 +51,14 @@ public class QuizActivity extends Activity {
         answerOne.setText(temp.answers[0].getText());
         answerTwo.setText(temp.answers[1].getText());
 
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        double incSize = 100.0/(myers.questionList.size());
+        progressGlob += incSize;
+
+        System.out.print(progressGlob);
+        System.out.print(" ");
+        System.out.println(myers.questionList.size());
+
             answerOne.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -57,6 +68,7 @@ public class QuizActivity extends Activity {
                         myers.getResult();
                         finish();
                     }
+                    progressBar.setProgress((int)progressGlob);
                     myersQuiz();
                 }
             });
@@ -70,6 +82,7 @@ public class QuizActivity extends Activity {
                         myers.getResult();
                         finish();
                     }
+                    progressBar.setProgress((int)progressGlob);
                     myersQuiz();
                 }
             });
