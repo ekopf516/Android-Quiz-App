@@ -24,6 +24,8 @@ public class QuizActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+        myers.resetResults();
+
         progressGlob = 0;
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setProgress(0);
@@ -55,21 +57,19 @@ public class QuizActivity extends Activity {
         double incSize = 100.0/(myers.questionList.size());
         progressGlob += incSize;
 
-        System.out.print(progressGlob);
-        System.out.print(" ");
-        System.out.println(myers.questionList.size());
-
             answerOne.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     myers.recordResponse(myers.getQuestion(), myers.getQuestion().answers[0]);
-                    myers.nextQuestion();
                     if (myers.getQuestion() == myers.questionList.get(myers.questionList.size() - 1)) {
-                        myers.getResult();
-                        finish();
+                        System.out.println("reached end 1");
+                        System.out.println(myers.getResult());
                     }
-                    progressBar.setProgress((int)progressGlob);
-                    myersQuiz();
+                    else {
+                        myers.nextQuestion();
+                        progressBar.setProgress((int) progressGlob);
+                        myersQuiz();
+                    }
                 }
             });
 
@@ -77,13 +77,15 @@ public class QuizActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     myers.recordResponse(myers.getQuestion(), myers.getQuestion().answers[1]);
-                    myers.nextQuestion();
                     if (myers.getQuestion() == myers.questionList.get(myers.questionList.size() - 1)) {
-                        myers.getResult();
-                        finish();
+                        System.out.println("reached end 2");
+                        System.out.println(myers.getResult());
                     }
-                    progressBar.setProgress((int)progressGlob);
-                    myersQuiz();
+                    else {
+                        myers.nextQuestion();
+                        progressBar.setProgress((int) progressGlob);
+                        myersQuiz();
+                    }
                 }
             });
 
