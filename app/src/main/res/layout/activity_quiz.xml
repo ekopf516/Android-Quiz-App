@@ -29,7 +29,8 @@
         android:layout_height="wrap_content"
         android:text="testing"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_below="@+id/progressText"/>
+        android:layout_below="@+id/progressText"
+        android:padding="15dp" />
 
     <Button
         android:id="@+id/answerOne"
