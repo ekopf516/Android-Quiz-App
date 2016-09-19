@@ -184,7 +184,7 @@ public class MyersBriggsQuiz implements Quiz{
                 new Question(
                         "In your social groups do you:",
                         new Answer[]{
-                                new Answer("Keep abreast of otherâ€™s happenings", CATEGORY_A),
+                                new Answer("Keep abreast of others' happenings", CATEGORY_A),
                                 new Answer("Get behind on the news", CATEGORY_B)
                         },
                         TYPE_EI
@@ -241,7 +241,7 @@ public class MyersBriggsQuiz implements Quiz{
                         "In phoning do you:",
                         new Answer[]{
                                 new Answer("Rarely question that it will all be said", CATEGORY_A),
-                                new Answer("Rehearse what youâ€™ll say", CATEGORY_B)
+                                new Answer("Rehearse what you'll say", CATEGORY_B)
                         },
                         TYPE_EI
                 ),
@@ -486,7 +486,7 @@ public class MyersBriggsQuiz implements Quiz{
                         TYPE_SN
                 ),
                 new Question(
-                        "Which person is more to be complimented â€“ one of:",
+                        "Which person is more to be complimented, one of:",
                         new Answer[]{
                                 new Answer("clear reason", CATEGORY_A),
                                 new Answer("strong feeling ", CATEGORY_B)
